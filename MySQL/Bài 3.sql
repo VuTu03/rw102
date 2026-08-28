@@ -46,10 +46,14 @@ limit 1;
 -- chữa:
 select count(1)
 from question q
-join examquestion eq on  q.question_id = eq.question_id
+left join examquestion eq on  q.question_id = eq.question_id
 group by eq.question_id
-order by count(1) desc
-limit 1;
+having count(1) = (select count(1)
+					from question q
+					left join examquestion eq on  q.question_id = eq.question_id
+					group by eq.question_id
+                    order by count(1) desc
+                    limit 1);
 
 -- Question 6: Thông kê mỗi CategoryQuestion được sử dụng trong bao nhiêu Question
 -- (Đã chữa)

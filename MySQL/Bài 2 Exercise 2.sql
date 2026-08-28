@@ -13,32 +13,72 @@ where Department_name ='Sale';
 
 
 -- Question 4: Lấy ra thông tin account có full name dài nhất
-select*
-from Account
-order by length(Full_name) desc
-limit 1;
+-- dữ liệu nằm ở bảng nào? account
+-- điều kiện đề bài yêu cầu là gì? full name dài nhất - có nhiều kí tự nhất
+-- các bước làm:
+-- b1: tìm ra độ dài nhất của fullname
+select length(full_name)
+from account
+order by length(full_name) desc
+limit 1; -- 17
+
+-- b2: tìm ra các tên có độ dài = max
+select *, length(full_name) as 'độ dài'
+from account 
+where length(full_name) = 17;
+
+
+select *, length(full_name) as 'độ dài'
+from account
+where length(full_name) = (select *, length(full_name)
+							from account 
+							order by length(full_name) desc
+                            limit 1);
+
+
 
 
 -- Question 5: Lấy ra thông tin account có full name dài nhất và thuộc phòng ban có id  = 3 
-select*
-from Account
-where Department_id = 3
-order by length(Full_name) desc
-limit 1; 
+-- chữa:
+select *, length(full_name) as 'độ dài'
+from account
+where department_id = 3 and length(full_name) = (select max(length(full_name))
+													from account
+                                                    where Department_id = 3);
 
 
 -- Question 6: Lấy ra tên group đã tham gia trước ngày 20/12/2019
- select Group_name
+ select *
  from `Group`
  where Create_date < '2019/12/20';
  
  
 -- Question 7: Lấy ra ID của question có >= 4 câu trả lời
+-- dữ liệu nằm ở bảng nào? question_id và liên quan đến câu trả lời answwer
+-- điều kiện đề bài yêu cầu là gì? >=4 câu trả lời 
 select Question_id, count(*)
 from Answer
 group by Question_id
 having count(*) >= 4;
 
+-- chữa:
+select Question_id, count(1)
+from Answer
+group by Question_id
+having count(1) >= 4;
+
+
+-- vd: Lấy ra ID của question có nhiều câu trả lời nhất
+-- b1: tìm ra số lượng câu trả lời nhiều nhất của 1 câu hỏi là bao nhiêu = max
+-- b2: tìm ra các câu hỏi có số lượng câu trả lời = max
+select Question_id
+from Answer
+group by Question_id
+having count(1) = (select count(1)
+					from answer
+                    group by Question_id
+                    order by count (1) desc
+                    limit 1);
 
 -- Question 8: Lấy ra các mã đề thi có thời gian thi >= 60 phút và được tạo trước ngày 20/12/2019
 select code
@@ -58,6 +98,12 @@ select Department_id, count(Account_id)
 from Account
 where Department_id = 2;
 
+-- chữa:
+
+select count(1)
+from Account
+where Department_id = 2;
+
 
 -- Question 11: Lấy ra nhân viên có tên bắt đầu bằng chữ "D" và kết thúc bằng chữ "o"
 select*
@@ -74,7 +120,7 @@ delete from Question where Content = 'Câu hỏi';
 
 
 -- Question14: Update thông tin của account có id = 5 thành tên "Nguyễn Bá Lộc" và email thành loc.nguyenba@vti.com.vn
-update account set Full_name = 'Nguyễn Bá Lộc' and Email = 'loc.nguyenba@vti.com.vn' where Account_id = 5;
+update account set Full_name = 'Nguyễn Bá Lộc' , Email = 'loc.nguyenba@vti.com.vn' where Account_id = 5;
 
 
 -- Question 15: update account có id = 5 sẽ thuộc group có id = 4 
