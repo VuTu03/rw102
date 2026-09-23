@@ -1,5 +1,63 @@
+import java.time.LocalDate;
+
 public class Program {
     public static void main(String[] args) {
+        Department department1 = new Department();
+        department1.id = 1;
+        department1.name = "Sale";
+
+        Department department2 = new Department();
+        department2.id = 2;
+        department2.name = "Marketing";
+
+        Department department3 = new Department();
+        department3.id = 3;
+        department3.name = "Bảo vệ";
+
+        Position position1 = new Position();
+        position1.id = 1;
+        position1.name = Position.PositionName.DEV;
+
+        Position position2 = new Position();
+        position2.id = 2;
+        position2.name = Position.PositionName.TEST;
+
+        Position position3 = new Position();
+        position3.id = 3;
+        position3.name = Position.PositionName.SCRUM_MASTER;
+
+        Position position4 = new Position();
+        position4.id = 1;
+        position4.name = Position.PositionName.PM;
+
+
+        Account account1 = new Account();
+        account1.id = 1;
+        account1.email = "Email 1";
+        account1.username = "Username 1";
+        account1.fullName = "FullName 1";
+        account1.department = department1;
+        account1.position = position1;
+        account1.createDate = LocalDate.of(2020, 1, 1);
+
+        Account account2 = new Account();
+        account2.id = 2;
+        account2.email = "Email 2";
+        account2.username = "Username 2";
+        account2.fullName = "FullName 2";
+        account2.department = department1;
+        account2.position = position1;
+        account2.createDate = LocalDate.of(2020, 1, 1);
+
+        Account account3 = new Account();
+        account3.id = 3;
+        account3.email = "Email 3";
+        account3.username = "Username 3";
+        account3.fullName = "FullName 3";
+        account3.department = department1;
+        account3.position = position1;
+        account3.createDate = LocalDate.of(2020, 1, 1)
+    }
 //        Exercise 1 (Optional): Flow Control
 //        IF
 //        Question 1:
@@ -7,11 +65,10 @@ public class Program {
 //        Nếu không có phòng ban (tức là department == null) thì sẽ in ra text
 //        "Nhân viên này chưa có phòng ban"
 //        Nếu không thì sẽ in ra text "Phòng ban của nhân viên này là …"
-        String Department = null;
-        if (Department == null){
+        if (account2.department == null){
             System.out.println("Nhân viên này chưa có phòng ban");
         }else {
-            System.out.println("Phòng ban của nhân viên này là: " +Department);
+            System.out.println("Phòng ban của nhân viên này là: " +department);
         }
 
 
@@ -161,11 +218,11 @@ public class Program {
 
 //        Question 12:
 //        Chỉ in ra thông tin 2 department đầu tiên theo định dạng như Question 10
-            Department[] depArray2 = { dep1, dep2, dep3 };
-            for (int i = 0; i < 2; i++) {
-                System.out.println("Thông tin department thứ " + (i + 1) + "là");
-                        System.out.println("Id: " + depArray2[i].id);
-                System.out.println("Name: " + depArray2[i].name);
+            for (int i = 0; i < department.length: i++){
+                if (i < 2){
+                    System.out.println("Department ID: " + department[i].id + "Department Name: " + department[i].name);
+                }
+        }
 
 
 
@@ -199,7 +256,7 @@ public class Program {
 //        In ra các số chẵn nhỏ hơn hoặc bằng 20
                 for (int i = 1; i <= 20; i++) {
                     if (i%2 ==0 ) {
-                    System.out.print(i+ "  ");
+                    System.out.print(i);
                 }
                 }
 
