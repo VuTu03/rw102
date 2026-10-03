@@ -86,7 +86,7 @@ public class Program {
         System.out.println("NameID: "+ group1.createId);
         System.out.println("Date: "+ group1.createDate);
 
-        
+
         GroupAccount groupAccount1 = new GroupAccount();
         groupAccount1.group = group1;
         groupAccount1.account = account1;
